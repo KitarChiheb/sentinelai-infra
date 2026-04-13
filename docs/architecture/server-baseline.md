@@ -20,7 +20,8 @@
 * **Disk:** 1007GB (Virtual Disk Image)
 
 ## 3. User Accounts
-*Full user list contains 28 entries. Table below documents accounts of operational significance.*
+*Full user list contains 30 entries. Table below documents accounts of operational significance.*
+*As of INFRA-21, production user model implemented. chihe account retained temporarily pending full transition to chiheb in INFRA-22.*
 | Username | UID | Shell | Purpose | Interactive? |
 | :--- | :--- | :--- | :--- | :--- |
 | **root** | 0 | /bin/bash | System Administrator | Yes (**High Risk**: To be hardened in INFRA-23) |
@@ -29,19 +30,23 @@
 | **backup** | 34 | /usr/sbin/nologin | System backup service | No |
 | **nobody** | 65534 | /usr/sbin/nologin | Unprivileged tasks | No |
 | **systemd-resolve** | 991 | /usr/sbin/nologin | Network Name Resolution service | No |
-| **chihe** | 1000 | /bin/bash | Primary Admin (Human) | Yes |
+| **chihe** | 1000 | /bin/bash | Primary Admin (cleaned group memberships) | Yes |
+| **chiheb** | 1001 | /bin/bash | Primary Sysadmin | Yes |
+| **sentinelai-app** | 999 | /usr/sbin/nologin | SentinelAI Application Service Account | No |
 
 ## 4. Group Memberships
 | Group | Members | Purpose | Risk Notes |
 | :--- | :--- | :--- | :--- |
 | **root** | *(none)* | Full system control | No human members allowed. |
-| **adm** | syslog, **chihe** | Log File Access | High. Access to sensitive PII logs. |
+| **adm** | syslog, **chihe**, **chiheb** | Log File Access | High. Access to sensitive PII logs. |
 | **sudo** | **chihe** | Root Privilege Access | **Critical.** Full system bypass. |
 | **docker** | **chihe** | Docker Management | **Critical.** Privilege escalation risk. |
-| **cdrom/dip** | **chihe** | Hardware/Legacy | **Low.** Desktop legacy; remove in INFRA-21. |
-| **plugdev** | **chihe** | External Device Access | **Low.** Desktop legacy; remove in INFRA-21. |
-| **users** | **chihe** | General User Group | Low. Shared resources. |
-
+| **cdrom/dip** | *(none)* | Hardware/Legacy | **Low.** Desktop legacy; remove in INFRA-21. |
+| **plugdev** | *(none)* | External Device Access | **Low.** Desktop legacy; remove in INFRA-21. |
+| **users** | **chihe** | General User Group | **Low.** Shared resources. |
+| **sysadmin** | **chiheb** | Primary Sysadmin Group | **Low.** No Privilege in INFRA-21. |
+| **appteam** | **chihe** | General User Group | **Low.** No Privilege in INFRA-21. |
+| **readonly** | **sentinelai-app** | General User Group | **Low.** No Privilege in INFRA-21. |
 ## 5. Running Services
 | Service | Purpose | Keep/Review/Remove |
 | :--- | :--- | :--- |
