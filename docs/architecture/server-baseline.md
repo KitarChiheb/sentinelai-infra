@@ -21,15 +21,14 @@
 
 ## 3. User Accounts
 *Full user list contains 28 entries. Table below documents accounts of operational significance.*
-
 | Username | UID | Shell | Purpose | Interactive? |
 | :--- | :--- | :--- | :--- | :--- |
-| **root** | 0 | /bin/bash | System Administrator | Yes (High Risk) |
+| **root** | 0 | /bin/bash | System Administrator | Yes (**High Risk**: To be hardened in INFRA-23) |
 | **daemon** | 1 | /usr/sbin/nologin | Standard system service | No |
 | **www-data** | 33 | /usr/sbin/nologin | Web server (Apache/Nginx) | No |
 | **backup** | 34 | /usr/sbin/nologin | System backup service | No |
 | **nobody** | 65534 | /usr/sbin/nologin | Unprivileged tasks | No |
-| **systemd-resolve** | 991 | /usr/sbin/nologin | DNS Resolution service | No |
+| **systemd-resolve** | 991 | /usr/sbin/nologin | Network Name Resolution service | No |
 | **chihe** | 1000 | /bin/bash | Primary Admin (Human) | Yes |
 
 ## 4. Group Memberships
@@ -39,7 +38,8 @@
 | **adm** | syslog, **chihe** | Log File Access | High. Access to sensitive PII logs. |
 | **sudo** | **chihe** | Root Privilege Access | **Critical.** Full system bypass. |
 | **docker** | **chihe** | Docker Management | **Critical.** Privilege escalation risk. |
-| **plugdev** | **chihe** | External Device Access | **Low.** Desktop legacy; remove in prod. |
+| **cdrom/dip** | **chihe** | Hardware/Legacy | **Low.** Desktop legacy; remove in INFRA-21. |
+| **plugdev** | **chihe** | External Device Access | **Low.** Desktop legacy; remove in INFRA-21. |
 | **users** | **chihe** | General User Group | Low. Shared resources. |
 
 ## 5. Running Services
@@ -82,7 +82,7 @@
 
 ## 9. Key Findings & Risks
 * **OS Discrepancy:** Running **Ubuntu 24.04 LTS**, contradicting the 22.04 requirement.
-* **Privilege Creep:** User `chihe` holds unnecessary memberships in desktop groups (`cdrom`, `dip`, `plugdev`).
+* **Privilege Creep:** User `chihe` holds unnecessary memberships in desktop-legacy groups (e.g., `cdrom`, `dip`, `plugdev`), documented in Section 4.
 * **SSH Gap:** No `sshd` is running; remote access dependency for Sprint 1 is currently blocked.
 * **Docker Risk:** `docker` group membership provides a direct path to root privilege escalation.
 * **Unknown Surface:** UDP port `40121` is listening globally and requires forensic identification.
