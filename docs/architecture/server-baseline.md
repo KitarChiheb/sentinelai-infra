@@ -4,13 +4,13 @@
 * **Date:** 2026-04-12
 * **Author:** Chiheb Kitar
 * **Ticket Reference:** INFRA-18 (WSL2 Server Baseline Audit)
-* **Status:** DRAFT (Awaiting Lead Review)
+* **Status:** APPROVED — Updated INFRA-20
 
 ## 1. System Identity
 * **OS:** Ubuntu 24.04.4 LTS (Noble Numbat)
 * **Kernel:** 6.6.87.2-microsoft-standard-WSL2
-* **Hostname:** DESKTOP-9T7GMVN
-* **FQDN:** DESKTOP-9T7GMVN.localdomain
+* **Hostname:** sentinelai-prod-01
+* **FQDN:** sentinelai-prod-01.localdomain
 * **Virtualization Type:** WSL2 (Microsoft Hyper-V lightweight VM)
 
 ## 2. Hardware Profile
