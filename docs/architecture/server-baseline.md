@@ -3,8 +3,8 @@
 ## Document Metadata
 * **Date:** 2026-04-12
 * **Author:** Chiheb Kitar
-* **Ticket Reference:** INFRA-18 (created) | INFRA-20 (hostname update) | INFRA-21 (user model update)
-* **Status:** APPROVED — Updated INFRA-21
+* **Ticket Reference:** INFRA-18 (created) | INFRA-20 (hostname update) | INFRA-21 (user model update) | INFRA-22 (sudo policy update)
+* **Status:** APPROVED — Updated INFRA-22
 
 ## 1. System Identity
 * **OS:** Ubuntu 24.04.4 LTS (Noble Numbat)
@@ -44,8 +44,8 @@
 | **cdrom/dip** | *(none)* | Hardware/Legacy | **Low.** Desktop legacy; Removed in INFRA-21. |
 | **plugdev** | *(none)* | External Device Access | **Low.** Desktop legacy; Removed in INFRA-21. |
 | **users** | **chihe** | General User Group | **Low.** Shared resources. |
-| **sysadmin** | **chiheb** | Primary Sysadmin Group | **Low.** Sudo policy defined in INFRA-22. |
-| **appteam** | *(none)* | Application Operators Group | **Low.** No Privilege in INFRA-21. |
+| **sysadmin** | **chiheb** | Primary Sysadmin Group | **Critical.** Full sudo — INFRA-22 implemented. |
+| **appteam** | *(none)* | Application Operators Group | **Low.** Scoped sudo for service operations — INFRA-22 implemented. |
 | **readonly** | *(none)* | Monitoring and Debugging Group | **Low.** No Privilege in INFRA-21. |
 ## 5. Running Services
 | Service | Purpose | Keep/Review/Remove |
