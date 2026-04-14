@@ -14,11 +14,11 @@ Accepted
 
 ## Decision
 * Upgrade the user account architecture and the group design to have a consistent production identity model by creating new groups and users
-* sysadmin group (Members of this group are infrastructure engineers), they get full sudo access (configured in INFRA-22), any human who needs to administer this server must be in this group.
-* appteam group (Members of this group are application operators), they can restart the SentinelAI application service and read application logs. They cannot touch system configuration.
-* readonly group Members of this group can read logs and configuration files for monitoring and debugging purposes. They cannot change anything.
-* chiheb — This is your correct production username. Not chihe — that was a typo at machine creation.This is the human sysadmin account. It belongs to the sysadmin group as its primary group.
-* sentinelai-app — This is a service account. It is the user that the SentinelAI FastAPI application runs as.It belongs to the appteam group. It has exactly the permissions the application needs and nothing else. This is the principle of least privilege applied to service isolation.
+* The sysadmin group created as members of this group are infrastructure engineers, they get full sudo access (configured in INFRA-22), any human who needs to administer this server must be in this group.
+* The appteam group created as members of this group are application operators, they can restart the SentinelAI application service and read application logs. They cannot touch system configuration.
+* The readonly group created as members of this group can read logs and configuration files for monitoring and debugging purposes. They cannot change anything.
+* The account chiheb is created as the primary human sysadmin account. Not chihe — that was a typo at machine creation.This is the human sysadmin account. It belongs to the sysadmin group as its primary group.
+* The account sentinelai-app is created as a service account. It is the user that the SentinelAI FastAPI application runs as.It belongs to the appteam group. It has exactly the permissions the application needs and nothing else. This is the principle of least privilege applied to service isolation.
 * chihe account retained temporarily pending full transition to chiheb i 
 
 ## Consequences

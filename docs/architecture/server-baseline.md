@@ -3,7 +3,7 @@
 ## Document Metadata
 * **Date:** 2026-04-12
 * **Author:** Chiheb Kitar
-* **Ticket Reference:** INFRA-18 (WSL2 Server Baseline Audit)
+* **Ticket Reference:** INFRA-18 (created) | INFRA-20 (hostname update) | INFRA-21 (user model update)
 * **Status:** APPROVED — Updated INFRA-20
 
 ## 1. System Identity
@@ -44,9 +44,9 @@
 | **cdrom/dip** | *(none)* | Hardware/Legacy | **Low.** Desktop legacy; remove in INFRA-21. |
 | **plugdev** | *(none)* | External Device Access | **Low.** Desktop legacy; remove in INFRA-21. |
 | **users** | **chihe** | General User Group | **Low.** Shared resources. |
-| **sysadmin** | **chiheb** | Primary Sysadmin Group | **Low.** No Privilege in INFRA-21. |
-| **appteam** | **chihe** | General User Group | **Low.** No Privilege in INFRA-21. |
-| **readonly** | **sentinelai-app** | General User Group | **Low.** No Privilege in INFRA-21. |
+| **sysadmin** | **chiheb** | Primary Sysadmin Group | **Low.** Sudo policy defined in INFRA-22. |
+| **appteam** | *(none)* | Application Operators Group | **Low.** No Privilege in INFRA-21. |
+| **readonly** | *(none)* | Monitoring and Gebugging Group | **Low.** No Privilege in INFRA-21. |
 ## 5. Running Services
 | Service | Purpose | Keep/Review/Remove |
 | :--- | :--- | :--- |
@@ -87,7 +87,7 @@
 
 ## 9. Key Findings & Risks
 * **OS Discrepancy:** Running **Ubuntu 24.04 LTS**, contradicting the 22.04 requirement.
-* **Privilege Creep:** User `chihe` holds unnecessary memberships in desktop-legacy groups (e.g., `cdrom`, `dip`, `plugdev`), documented in Section 4.
+* **Privilege Creep:** Resolved in INFRA-21: Legacy group memberships (cdrom, dip, plugdev) removed from chihe.
 * **SSH Gap:** No `sshd` is running; remote access dependency for Sprint 1 is currently blocked.
 * **Docker Risk:** `docker` group membership provides a direct path to root privilege escalation.
 * **Unknown Surface:** UDP port `40121` is listening globally and requires forensic identification.
