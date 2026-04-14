@@ -10,7 +10,7 @@ Accepted
 * Everything we do on this server — firewall rules, sudo policies, service isolation, file permissions,audit logging — depends on having a correct user and group model.
 * If the identity layer is wrong,every security control built on top of it will cause problems in a production server.
 * The previous state of the server has one human user: chihe, with a messy group membership inherited from a desktop Ubuntu install.
-* The server was not a production identity model and does not fllow the priciples ofnleast privilege.
+* The server was not a production identity model and does not follow the principles of least privilege.
 
 ## Decision
 * Upgrade the user account architecture and the group design to have a consistent production identity model by creating new groups and users
@@ -19,11 +19,11 @@ Accepted
 * The readonly group created as members of this group can read logs and configuration files for monitoring and debugging purposes. They cannot change anything.
 * The account chiheb is created as the primary human sysadmin account. Not chihe — that was a typo at machine creation.This is the human sysadmin account. It belongs to the sysadmin group as its primary group.
 * The account sentinelai-app is created as a service account. It is the user that the SentinelAI FastAPI application runs as.It belongs to the appteam group. It has exactly the permissions the application needs and nothing else. This is the principle of least privilege applied to service isolation.
-* chihe account retained temporarily pending full transition to chiheb i 
+* chihe account retained temporarily pending full transition to chiheb account 
 
 ## Consequences
 * Solidify and upgrade the overall user and group architecture for the SentinelAI production server. 
-* creating a sentinelai-app service account withcnologin means we can never interactively debug the application as that user — we will need to use sudo -u sentinelai-app for any direct testing. 
+* creating a sentinelai-app service account with nologin means we can never interactively debug the application as that user — we will need to use sudo -u sentinelai-app for any direct testing. 
 
 ## Alternatives Considered
 * Flat model: give chihe all required access directly without creating groups. Rejected because it does not scale — adding a second engineer requires re-auditing individual permissions rather than adding them to a group. It also creates no separation of concerns between infrastructure and application access.
