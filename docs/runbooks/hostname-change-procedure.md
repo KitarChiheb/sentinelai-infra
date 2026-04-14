@@ -40,12 +40,12 @@
 * restore the original hostname:
 ###Step1 - Restore the original /etc/hosts
 * If you have backups as mentioned in prerequisites do sudo cp /etc/hosts.bak /etc/hosts.
-* If not,Run sudo nano /etc/hosts to change the entry mapping 127.0.1.1 to the original mappings
+* If not,run sudo nano /etc/hosts to change the entry mapping 127.0.1.1 to the original mappings
 ###Step2 - Change(restore) the original hostname via hostnamectl
 * Run the following commande to apply(restore) hostname change:
 * hostnamectl set-hostname originalhostname
 ###Step3 - Restore the original wsl.conf file
-* If you have backups as mentioned in prerequisites do sudo sudo cp /etc/wsl.conf.bak /etc/wsl.conf.
+* If you have backups as mentioned in prerequisites do sudo cp /etc/wsl.conf.bak /etc/wsl.conf.
 * If not open the wsl.conf file using sudo nano /etc/wsl.conf 
 * remove the [network] block from wsl.conf and add comment in the top accordingly. 
 ###Step 4 — Verify and Restart WSL2
