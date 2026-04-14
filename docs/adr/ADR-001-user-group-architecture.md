@@ -26,5 +26,5 @@ Accepted
 * creating a sentinelai-app service account withcnologin means we can never interactively debug the application as that user — we will need to use sudo -u sentinelai-app for any direct testing. 
 
 ## Alternatives Considered
-* leaving only one sudo user will increase simplicity but also will increase security risks 
-* Attribute and manage the roles for groups and users will be done in INFRA22
+* Flat model: give chihe all required access directly without creating groups. Rejected because it does not scale — adding a second engineer requires re-auditing individual permissions rather than adding them to a group. It also creates no separation of concerns between infrastructure and application access.
+* Full RBAC via PAM/LDAP: use a centralized identity system. Rejected as out of scope for a single-server deployment — introduces significant operational complexity without proportional benefit at this scale. Revisit if the server count grows beyond five.
