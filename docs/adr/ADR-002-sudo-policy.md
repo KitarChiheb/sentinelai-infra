@@ -8,13 +8,13 @@ Accepted
 
 ## Context
 * sudo is a fine-grained policy engine, you can grant a user the ability to run exactly one command as root, or you can grant full unrestricted access. 
-* A poorly designed sudo policy that does not follow the principle of least privilege can enable an attacker to compromises an account and gains the ability to escalate privilege. 
+* A poorly designed sudo policy that does not follow the principle of least privilege can enable an attacker to compromise an account and gain the ability to escalate privilege. 
 * Prior to this decision, the server relied on the default Ubuntu sudo group, which granted binary "all-or-nothing" access.The chiheb account had no privileges, and there was no mechanism to allow application operators to manage services without granting them full root access. This lack of granularity created a high risk where a compromised application account could lead to a full system takeover.
 
 ## Decision
 * The sysadmin group is granted (ALL:ALL) ALL privileges, requiring password authentication for all escalations.
 * The appteam group is granted access to exactly five commands (start, stop, restart, status of the application, and journalctl for logs) via a Cmnd_Alias. 
-* While inlining five commands works syntactically but it is hard to read and hard to maintain, the professional approach uses a Cmnd_Alias — a named list of commands defined once and reference by name.
+* Inlining five commands works syntactically but it is hard to read and hard to maintain, the professional approach uses a Cmnd_Alias — a named list of commands defined once and reference by name.
 * The readonly group is intentionally excluded from the sudoers policy to enforce read-only status.
 * All rules are stored in /etc/sudoers.d/ using a numeric prefix convention (10-, 20-) to keep the system /etc/sudoers file clean and update-safe.
 
