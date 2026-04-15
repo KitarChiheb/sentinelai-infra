@@ -21,7 +21,7 @@
 
 ## 3. User Accounts
 *Full user list contains 30 entries. Table below documents accounts of operational significance.*
-*As of INFRA-21, production user model implemented. chihe account retained temporarily pending full transition to chiheb in INFRA-22.*
+*As of INFRA-21, production user model implemented. chihe account retained temporarily. Full transition deferred to INFRA-23.*
 | Username | UID | Shell | Purpose | Interactive? |
 | :--- | :--- | :--- | :--- | :--- |
 | **root** | 0 | /bin/bash | System Administrator | Yes (**High Risk**: To be hardened in INFRA-23) |
@@ -45,8 +45,8 @@
 | **plugdev** | *(none)* | External Device Access | **Low.** Desktop legacy; Removed in INFRA-21. |
 | **users** | **chihe** | General User Group | **Low.** Shared resources. |
 | **sysadmin** | **chiheb** | Primary Sysadmin Group | **Critical.** Full sudo — INFRA-22 implemented. |
-| **appteam** | *(none)* | Application Operators Group | **Low.** Scoped sudo for service operations — INFRA-22 implemented. |
-| **readonly** | *(none)* | Monitoring and Debugging Group | **Low.** No Privilege in INFRA-21. |
+| **appteam** | *(none)* | Application Operators Group | **Low.** Scoped sudo for service operations — INFRA-22 implemented. sentinelai-app primary group. Primary group members do not appear in /etc/group member list. |
+| **readonly** | *(none)* | Monitoring and Debugging Group | **Low.** No sudo privileges by design. Access via file permissions only. |
 ## 5. Running Services
 | Service | Purpose | Keep/Review/Remove |
 | :--- | :--- | :--- |
