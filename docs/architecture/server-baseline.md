@@ -21,7 +21,7 @@
 
 ## 3. User Accounts
 *Full user list contains 30 entries. Table below documents accounts of operational significance.*
-*As of INFRA-21, production user model implemented. chihe account retained temporarily. Full transition deferred to INFRA-23.*
+*As of INFRA-21, production user model implemented. chihe account retained temporarily. Full transition deferred to Sprint 2.*
 | Username | UID | Shell | Purpose | Interactive? |
 | :--- | :--- | :--- | :--- | :--- |
 | **root** | 0 | /bin/bash | System Administrator | Yes (**High Risk**: To be hardened in INFRA-23) |
@@ -76,7 +76,7 @@
 | **UDP** | 40121 | Unknown | 0.0.0.0 | **Review Required (External)** |
 | **TCP** | 2222 | ssh.service | 0.0.0.0 / [::] | Low (Hardened) |
 ## 7. DNS Architecture
-* The process querieRemote access manager.s the local **systemd-resolved** stub (`127.0.0.53`), which then forwards to the **Windows Host** resolver (`10.255.255.254`) for final internet resolution.
+* The process queries the local systemd-resolved stub (127.0.0.53), which then forwards to the Windows Host resolver (10.255.255.254) for final internet resolution.
 
 ## 8. Disk Layout
 | Mount Point | Filesystem | Size | Use% | Purpose |
