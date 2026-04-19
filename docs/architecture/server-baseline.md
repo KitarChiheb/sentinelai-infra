@@ -3,8 +3,8 @@
 ## Document Metadata
 * **Date:** 2026-04-12
 * **Author:** Chiheb Kitar
-* **Ticket Reference:** INFRA-18 (created) | INFRA-20 (hostname update) | INFRA-21 (user model update) | INFRA-22 (sudo policy update)
-* **Status:** APPROVED — Updated INFRA-22
+* **Ticket Reference:** INFRA-18 (created) | INFRA-20 (hostname update) | INFRA-21 (user model update) | INFRA-22 (sudo policy update) | INFRA-23 (SSH Hardening update)
+* **Status:** APPROVED — Updated INFRA-23
 
 ## 1. System Identity
 * **OS:** Ubuntu 24.04.4 LTS (Noble Numbat)
@@ -57,6 +57,7 @@
 | **unattended-upgrades**| Auto-security patching | **Review.** Monitor to prevent downtime. |
 | **wsl-pro.service** | WSL2 helper | **Keep.** Required for environment. |
 | **user@1000.service** | User session manager | **Keep.** Manages admin session. |
+| **ssh.service** | Remote access manager | **Keep.** ssh.socket disabled intentionally. |
 
 ## 6. Network Configuration
 
@@ -73,9 +74,9 @@
 | **UDP/TCP** | 53 | systemd-resolved | 127.0.0.53/54 | Low (Local) |
 | **UDP/TCP** | 53 | DNS Resolver | 10.255.255.254 | Medium (WSL Bridge) |
 | **UDP** | 40121 | Unknown | 0.0.0.0 | **Review Required (External)** |
-
+| **TCP** | 2222 | ssh.service | 0.0.0.0 / [::] | Low (Hardened) |
 ## 7. DNS Architecture
-* The process queries the local **systemd-resolved** stub (`127.0.0.53`), which then forwards to the **Windows Host** resolver (`10.255.255.254`) for final internet resolution.
+* The process querieRemote access manager.s the local **systemd-resolved** stub (`127.0.0.53`), which then forwards to the **Windows Host** resolver (`10.255.255.254`) for final internet resolution.
 
 ## 8. Disk Layout
 | Mount Point | Filesystem | Size | Use% | Purpose |
@@ -88,7 +89,7 @@
 ## 9. Key Findings & Risks
 * **OS Discrepancy:** Running **Ubuntu 24.04 LTS**, contradicting the 22.04 requirement.
 * **Privilege Creep:** Resolved in INFRA-21: Legacy group memberships (cdrom, dip, plugdev) removed from chihe.
-* **SSH Gap:** No `sshd` is running; remote access dependency for Sprint 1 is currently blocked.
+* **SSH Gap:** Resolved in INFRA-23.
 * **Docker Risk:** `docker` group membership provides a direct path to root privilege escalation.
 * **Unknown Surface:** UDP port `40121` is listening globally and requires forensic identification.
 
